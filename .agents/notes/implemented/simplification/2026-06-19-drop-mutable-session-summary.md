@@ -26,7 +26,7 @@ The removal narrows a public service contract and an on-disk format across two b
 
 ## No migration
 
-This is unreleased software (see [root AGENTS.md](../../../../AGENTS.md) § "Pre-release stance: foundation over blast radius"), so there are no on-disk databases or logs to preserve. SQLite does not migrate a v1 database: the `openDatabase` guard now rejects any non-current on-disk `user_version` (`onDisk !== 0 && onDisk !== SCHEMA_VERSION`) — older *or* newer — so a stale v1 DB is cleanly rejected rather than half-read against the new column set. A fresh database stamps the current version; that is the only path that needs to work.
+This is unreleased software (see the [session format refusal policy](../../../../docs/subsystems/persistence.md#format-refusal--logs-a-build-cannot-faithfully-read)), so there are no on-disk databases or logs to preserve. SQLite does not migrate a v1 database: the `openDatabase` guard now rejects any non-current on-disk `user_version` (`onDisk !== 0 && onDisk !== SCHEMA_VERSION`) — older *or* newer — so a stale v1 DB is cleanly rejected rather than half-read against the new column set. A fresh database stamps the current version; that is the only path that needs to work.
 
 ## Consequences
 

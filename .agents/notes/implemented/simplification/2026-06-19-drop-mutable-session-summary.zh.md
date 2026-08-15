@@ -26,7 +26,7 @@ Status: implemented
 
 ## 无需迁移
 
-这是未发布的软件（见[根 AGENTS.md](../../../../AGENTS.md)「Pre-release stance: foundation over blast radius」一节），因此没有需要保留的磁盘数据库或日志。SQLite 不迁移 v1 数据库：`openDatabase` 守卫现在拒绝任何非当前版本的磁盘 `user_version`（`onDisk !== 0 && onDisk !== SCHEMA_VERSION`），无论版本更旧*还是*更高，因此陈旧的 v1 数据库会被干净地拒绝，而不会按新的列集合进行不完整读取。新建数据库写入当前版本号；这是唯一需要正常工作的路径。
+这是未发布的软件（见[会话格式拒绝规范](../../../../docs/subsystems/persistence.md#format-refusal--logs-a-build-cannot-faithfully-read)），因此没有需要保留的磁盘数据库或日志。SQLite 不迁移 v1 数据库：`openDatabase` 守卫现在拒绝任何非当前版本的磁盘 `user_version`（`onDisk !== 0 && onDisk !== SCHEMA_VERSION`），无论版本更旧*还是*更高，因此陈旧的 v1 数据库会被干净地拒绝，而不会按新的列集合进行不完整读取。新建数据库写入当前版本号；这是唯一需要正常工作的路径。
 
 ## 后果
 
